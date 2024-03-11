@@ -1,0 +1,26 @@
+version: "3.4"
+services:
+ front:
+   build: ./front
+   container_name: youtube_front
+   command: dev
+   ports:
+     - 5173:5173
+   working_dir: /app
+   volumes:
+     - type: bind
+       source: ./front
+       target: /app
+  #  tty: true
+ back:
+   build: ./server
+   container_name: youtube_server
+   command: dev
+   ports:
+     - 8080:8080
+   working_dir: /app
+   volumes:
+     - type: bind
+       source: ./server/
+       target: /app
+  #  tty: true
