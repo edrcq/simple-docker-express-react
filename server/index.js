@@ -1,6 +1,6 @@
 import express from "express";
 import cors from 'cors'
-import { globalRouter } from "./features/globa.router";
+import { globalRouter } from "./features/global.router";
 
 const app = express()
 app.use(cors())
