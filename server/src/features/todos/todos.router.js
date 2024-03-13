@@ -6,7 +6,7 @@ import {
     remove,
     replace,
     update,
-} from './controllers'
+} from './controllers/index.js'
 
 export const router = Router()
 

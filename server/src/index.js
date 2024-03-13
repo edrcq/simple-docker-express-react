@@ -1,9 +1,11 @@
-import express from "express";
+import 'dotenv/config'
+import express from 'express'
 import cors from 'cors'
-import { globalRouter } from "./features/global.router";
+import { globalRouter } from './features/global.router.js'
 
 const app = express()
 app.use(cors())
+app.use(express.json())
 
 app.get('/', (req, res) => {
     console.log(req.query)

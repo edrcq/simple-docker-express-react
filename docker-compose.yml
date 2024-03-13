@@ -21,6 +21,6 @@ services:
    working_dir: /app
    volumes:
      - type: bind
-       source: ./server/
-       target: /app
+       source: ./server/src
+       target: /app/src
   #  tty: true
