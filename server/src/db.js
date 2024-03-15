@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize";
 import { config } from "./config.js"
+import { Todo } from "./models/Todo.js";
 
 export const sequelize = new Sequelize(
     config.MARIADB_DATABASE,
@@ -8,7 +9,7 @@ export const sequelize = new Sequelize(
     {
         host: 'mariadb',
         dialect: 'mariadb',
-    }
+    },
 );
 
 export async function testConnection() {
