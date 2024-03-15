@@ -7,6 +7,12 @@ import {
     replace,
     update,
 } from './controllers/index.js'
+import { validate } from '../../middleware/validator.js'
+import {
+    checkAdd,
+    checkReplace,
+    checkUpdate
+} from '../../utils/validator.js'
 
 export const router = Router()
 
@@ -22,7 +28,7 @@ export const router = Router()
  */
 router.get('/', getAll)
 router.get('/:id', getOne)
-router.post('/', insert)
-router.put('/:id', replace)
-router.patch('/:id', update)
+router.post('/', validate(checkAdd),insert)
+router.put('/:id', validate(checkReplace), replace)
+router.patch('/:id', validate(checkUpdate) ,update)
 router.delete('/:id', remove)
