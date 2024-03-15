@@ -24,3 +24,32 @@ services:
        source: ./server/src
        target: /app/src
   #  tty: true
+ mariadb:
+  image: "mariadb:11.1.3"
+  restart: always
+  working_dir: /app
+  volumes:
+    - ".:/app"
+    - "./docker/mariadb/data:/var/lib/mysql"
+    - "./docker/mariadb/logs:/var/log/mysql"
+    - "./docker/mariadb/conf:/etc/mysql"
+  environment:
+    MARIADB_ROOT_PASSWORD: "${MARIADB_ROOT_PASSWORD}"
+    MARIADB_DATABASE: "${MARIADB_DATABASE}"
+    MARIADB_USER: "${MARIADB_USER}"
+    MARIADB_PASSWORD: "${MARIADB_PASSWORD}"
+  ports:
+      - "3306:3306"
+
+ adminer:
+  image: adminer:4.8.1
+  restart: always
+  links:
+    - mariadb
+  depends_on:
+    - mariadb
+  environment:
+    ADMINER_DEFAULT_SERVER: mariadb
+    ADMINER_PLUGINS: "tables-filter tinymce"
+  ports:
+    - "8086:8080"
