@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { TodoItem } from './TodoItem'
 
 export function TodoList() {
   const [items, setItems] = useState([])
@@ -7,8 +8,9 @@ export function TodoList() {
   const addTodoItem = () => {
     setItems([
         ...items,
-        newItem
+        { text: newItem, is_done: false }
     ])
+    setNewItem('')
   }
 
   return (
@@ -26,7 +28,7 @@ export function TodoList() {
         <div>
             <ul>
             {items.map((item, i) =>
-                <li key={i}>{item}</li>
+                <TodoItem key={i} text={item.text} isDone={item.is_done} />
             )}
             </ul>
         </div>
