@@ -1,10 +1,24 @@
 import express from 'express'
 import cors from 'cors'
+import session from 'express-session'
 import { globalRouter } from './features/global.router.js'
 
 export function initWebServer() {
     const app = express()
-    app.use(cors())
+    app.use(cors({
+        origin: (origin, cb) => {
+            cb(null, true)
+        },
+        credentials: true,
+    }));
+    
+    app.use(session({
+        cookie: { maxAge: 60000 },
+        secret: 'secret',
+        resave: false,
+        saveUninitialized: false,
+    }))
+
     app.use(express.json())
 
     app.get('/', (req, res) => {
